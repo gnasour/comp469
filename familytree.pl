@@ -80,11 +80,11 @@ uncle(Uncle, Child):-
     brother(Uncle, Parent_of_sibling).
 
 son(Child, Parent):-
-    male(son),
+    male(Child),
     parent(Parent, Child).
 
 daughter(Child, Parent):-
-    female(son),
+    female(Child),
     parent(Parent, Child).
 
     
