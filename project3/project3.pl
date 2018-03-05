@@ -20,18 +20,31 @@ last(H, []):-
 
 /*
 second to last element
-Recursively check the list to see if it still has a tail i.e. atleast one element at the end.
-Explicitly ask for another item in the list by using a comma instead of a pipe.
-If it does, unify the variable to the head.
+Recursively check the list to see if it still has a tail i.e. check for a list.
+Check if there are at least two items in the list by using a comma instead of a pipe.
+If it does, unify the head to a variable and write that variable.
+I assumed that if there is one element in the list, then the last element in the list is the empty list 
+and the second to last element is the single element in that list.
 */
 nextlast([H|T]):-
-    nextlast(X, T).
+    nextlast(X, [H|T]).
 
-nextlast(X, [_|T]):-
+nextlast([]):-
+    write([]).
+
+nextlast([H|[]]):-
+    write(H).
+
+nextlast(X, [H|T]):-
     nextlast(X, T).
 
 nextlast(H, [H,_]):-
     write(H).
+
+nextlast(H, [H,[]]):-
+    write(H).
+
+
 
 
 /*
@@ -92,12 +105,23 @@ Definitions:
 Cite: https://stackoverflow.com/questions/27480578/code-for-prolog-program-to-check-whether-a-given-list-is-palindrome-or-not-witho
 Help from user joel76.
 */
-palindrome([]).
-palindrome([_]).
-palindrome(CheckList) :-
+palin([]).
+palin([_]).
+palin(CheckList) :-
     append([H|T], [H], CheckList),
-    palindrome(T).
+    palin(T).
 
+s :- 
+    last([a,b,c,d]),
 
+    nextlast([a,b,c,d]),
 
+    kelement([a,b,c,d,e,f,g],5),
 
+    palin([a,c,c,b,a]);
+
+    palin([a,b,c,c,b,a]),
+
+    flatten([a,[b,[c,d],e]]),
+
+    remove([a,b,c,d],3).
